@@ -2,25 +2,23 @@ from django.db import models
 
 
 class Profile(models.Model):
-    username = models.CharField(max_Length=50)
+    username = models.CharField(max_length=50)
     earnings = models.FloatField(default=0)
 
 
 class Account(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     account_name = models.CharField(max_length=50)
-    CHECKING = 'checking'
-    SAVING = 'saving'
-    DEBIT = 'debit'
-    ACCOUNT_TYPES = [
-        (CHECKING, 'Checking')
-        (SAVING, 'Savings')
-        (DEBIT, 'Debit')
-    ]
+
+    ACCOUNT_TYPES = (
+        ('checking', 'Checking'),
+        ('saving', 'Savings'),
+        ('debit', 'Debit')
+    )
     account_type = models.CharField(
         max_length=8,
         choices=ACCOUNT_TYPES,
-        default=DEBIT)
+        default=ACCOUNT_TYPES[2])
     account_balance = models.FloatField(default=0)
 
 
@@ -47,7 +45,7 @@ class Expense(models.Model):
 
 
 class Goal(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     goal_name = models.CharField(max_length=50)
     goal_total = models.FloatField(default=0)
     balance_saved = models.FloatField(default=0)
