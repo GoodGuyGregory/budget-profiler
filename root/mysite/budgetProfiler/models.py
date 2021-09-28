@@ -5,6 +5,9 @@ class Profile(models.Model):
     username = models.CharField(max_length=50)
     earnings = models.FloatField(default=0)
 
+    def __str__(self):
+        return self.username
+
 
 class Account(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -21,12 +24,18 @@ class Account(models.Model):
         default=ACCOUNT_TYPES[2])
     account_balance = models.FloatField(default=0)
 
+    def __str__(self):
+        return self.account_name
+
 
 class Debt(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     debt_name = models.CharField(max_length=50)
     balance_remaining = models.FloatField(default=0)
     interest = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.debt_name
 
 
 class Expense(models.Model):
@@ -43,11 +52,17 @@ class Expense(models.Model):
         choices=OCCURANCE_RATES,
         default=OCCURANCE_RATES[1])
 
+    def __str__(self):
+        return self.expense_name
+
 
 class Goal(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     goal_name = models.CharField(max_length=50)
     goal_total = models.FloatField(default=0)
     balance_saved = models.FloatField(default=0)
-    acomplish_date = models.DateTimeField('completion date')
+    acomplish_date = models.DateField('completion date')
     payment_deductions = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.goal_name
