@@ -1,13 +1,18 @@
-{% if foundUsername %}
-<div>
-    <h2>Welcome {{foundUsername}}, </h2>
+{% extends 'base.html' %}
 
-    <ul>
-        {% for account in user_accounts %}
-        <li>{{ account.account_name }}</a></li>
-        {% endfor %}
-    </ul>
+{% block content %}
+
+{% if foundUsername %}
+<div class="mdc-card">
+    <h2>Welcome {{foundUsername}}, </h2>
 </div>
+<ul>
+    {% for account in user_accounts %}
+    <li>{{ account.account_name }}</a></li>
+    {% endfor %}
+</ul>
+
 {% else %}
 <p>No accounts are available for username</p>
 {% endif %}
+{% endblock %}
