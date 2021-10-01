@@ -1,8 +1,13 @@
 {% if foundUsername %}
 <div>
     <h2>Welcome {{foundUsername}}, </h2>
+
+    <ul>
+        {% for account in user_accounts %}
+        <li>{{ account.account_name }}</a></li>
+        {% endfor %}
+    </ul>
 </div>
-</ul>
 {% else %}
 <p>No accounts are available for username</p>
 {% endif %}

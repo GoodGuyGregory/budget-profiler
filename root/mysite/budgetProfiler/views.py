@@ -11,8 +11,11 @@ def index(request):
 def dashboard(request, username):
     # case insensitive with __iexact
     foundUsername = Profile.objects.get(username__iexact=username)
+    foundUserid = foundUsername.id
+    user_accounts = Account.objects.filter(profile=foundUserid)
     context = {
         'foundUsername': foundUsername,
+        'user_accounts': user_accounts
     }
     return render(request, 'budgetprofiler/dashboard.html', context)
 
