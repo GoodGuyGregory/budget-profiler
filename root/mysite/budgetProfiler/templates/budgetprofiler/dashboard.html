@@ -81,6 +81,40 @@
                 </div>
                 {% endfor %}
                 {% endif %}
+                <button type="button" class="m-lg-4 btn btn-outline-info btn-sm">Add Expense</button>
+            </div>
+            <div class="row">
+                <div class="mt-lg-4 card">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="text-start p-lg-2">Goals</h4>
+                        </div>
+
+                        <div class="col-6">
+                            <h4 class="text-end m-lg-2">Total Saved:</h4>
+                        </div>
+                    </div>
+                    {% if user_goals%}
+                    <div class="row">
+                        {% for goal in user_goals%}
+                        <div class="col-3">
+                            <p class="text-center">{{ goal }}</p>
+                        </div>
+                        <div class="col-4">
+                            <p class="text-center">${{goal.goal_total}}</p>
+                        </div>
+                        <div class="col-5">
+                            <p class="text-center">${{goal.balance_saved}}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="m-lg-3 btn btn-outline-success btn-sm">Add Goal</button>
+                    {% else %}
+                    <p class="font-monospace text-center ">No Current Goals</p>
+                    <button type="button" class="m-lg-3 btn btn-outline-success btn-sm">Add Goal</button>
+                    {% endif%}
+
+                </div>
             </div>
         </div>
     </div>

@@ -14,10 +14,12 @@ def dashboard(request, username):
     foundUserid = foundUsername.id
     user_accounts = Account.objects.filter(profile=foundUserid)
     user_expenses = Expense.objects.filter(profile=foundUserid)
+    user_goals = Goal.objects.filter(profile=foundUserid)
     context = {
         'foundUsername': foundUsername,
         'user_accounts': user_accounts,
         'user_expenses': user_expenses,
+        'user_goals': user_goals,
     }
     return render(request, 'budgetprofiler/dashboard.html', context)
 
