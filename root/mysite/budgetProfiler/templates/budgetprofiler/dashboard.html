@@ -1,18 +1,93 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="lg-p-2 container">
 
-{% if foundUsername %}
-<div class="mdc-card">
-    <h2>Welcome {{foundUsername}}, </h2>
+    {% if foundUsername %}
+    <div class="row">
+        <div class="mt-lg-4 mb-lg-4 col-6">
+            <div class="p-lg-4 card">
+                <h2>Welcome, {{foundUsername}} </h2>
+            </div>
+        </div>
+        <div class="mt-lg-5 col-4">
+            <div class="p-lg-2 card">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Summary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Sheets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Expenses</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="p-lg-3 col-6">
+            <div class="card">
+                <div class="conatiner">
+                    <div class="row">
+                        <div class="p-lg-3 col-6">
+                            {% if user_accounts %}
+                            <h4 class="text-center">Accounts</h4>
+                            {% for account in user_accounts %}
+                            <p class="text-center">{{ account.account_name }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="p-lg-3 col-3">
+                            {% if user_accounts %}
+                            <h4>Type</h4>
+                            {% for account in user_accounts %}
+                            <p>{{ account.account_type }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="p-lg-3 col-3">
+                            {% if user_accounts %}
+                            <h4>Balance</h4>
+                            {% for account in user_accounts %}
+                            <p>${{ account.account_balance}}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="p-lg-3 col-5">
+            <div class="p-lg-3 card">
+                <h4 class="text-start">Expenses</h4>
+                {% if user_expenses %}
+                {% for expense in user_expenses %}
+                <div class="card start m-lg-2 p-lg-2">
+                    <div class="row">
+                        <div class="col-5">
+                            <p class="text-center">{{ expense }}</p>
+                        </div>
+                        <div class="col-7">
+                            <p class="text-center">${{ expense.cost }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+    {% else %}
+    <p>No accounts are available for username</p>
+    {% endif %}
+    {% endblock %}
 </div>
-<ul>
-    {% for account in user_accounts %}
-    <li>{{ account.account_name }}</a></li>
-    {% endfor %}
-</ul>
-
-{% else %}
-<p>No accounts are available for username</p>
-{% endif %}
-{% endblock %}
